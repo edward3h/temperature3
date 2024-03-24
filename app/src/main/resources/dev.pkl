@@ -11,7 +11,7 @@ sensors {
 }
 
 openweather {
-  url = "https://api.openweathermap.org/data/2.5/onecall?appid=\(read("env:OPENWEATHER_ID"))&lat\(read("env:LAT"))=&lon=\(read("env:LON"))&exclude=minutely,hourly,alerts&units=imperial"
+  url = "https://api.openweathermap.org/data/2.5/onecall?appid=\(read("env:OPENWEATHER_ID"))&lat\(read("env:LAT"))&lon=\(read("env:LON"))&exclude=minutely,hourly,alerts&units=imperial"
   pollEvery = 15.min
 }
 
