@@ -1,0 +1,9 @@
+sensors:
+  base: http://expunge2:8888
+
+openweather:
+  pollEvery: PT15M
+  url: https://api.openweathermap.org/data/2.5/onecall?appid=${OPENWEATHER_ID}&lat=${LAT}&lon=${LON}&exclude=minutely,hourly,alerts&units=imperial
+
+datasource:
+  url: jdbc:mariadb://localhost:3306/temperature?user=temp3&password=testing123

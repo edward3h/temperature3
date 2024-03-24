@@ -1,0 +1,18 @@
+@ModuleInfo { minPklVersion = "0.25.1" }
+module org.ethelred.temperature3.configuration
+
+sensors: Poller
+openweather: Poller
+pollers: Mapping<String, Poller>
+datasource: DataSource
+
+class Poller {
+  pollEvery: Duration = 5.min
+  url: Uri
+}
+
+class DataSource {
+  url: String
+  user: String
+  password: String
+}

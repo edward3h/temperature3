@@ -1,0 +1,34 @@
+
+[versions]
+avaje-inject = "9.11"
+avaje-http = "2.0"
+avaje-jsonb = "1.9"
+jdbi = "3.43.0"
+
+[libraries]
+avaje-inject = { module="io.avaje:avaje-inject", version.ref="avaje-inject"}
+avaje-inject-processor = { module="io.avaje:avaje-inject-generator", version.ref="avaje-inject"}
+avaje-inject-test = { module="io.avaje:avaje-inject-test", version.ref="avaje-inject"}
+avaje-http = {module="io.avaje:avaje-http-api", version.ref="avaje-http"}
+avaje-http-processor = {module="io.avaje:avaje-http-helidon-generator", version.ref="avaje-http"}
+avaje-http-client = { module="io.avaje:avaje-http-client", version.ref="avaje-http"}
+avaje-http-client-processor = { module="io.avaje:avaje-http-client-generator", version.ref="avaje-http"}
+avaje-jsonb = {module="io.avaje:avaje-jsonb", version.ref="avaje-jsonb"}
+avaje-jsonb-processor = {module="io.avaje:avaje-jsonb-generator", version.ref="avaje-jsonb"}
+avaje-config = "io.avaje:avaje-config:3.10"
+helidon-webserver = "io.helidon.webserver:helidon-webserver:4.0.5"
+slf4j = "org.slf4j:slf4j-api:2.0.11"
+logevents = "org.logevents:logevents:0.5.2"
+
+jdbi-core = {module="org.jdbi:jdbi3-core", version.ref="jdbi"}
+jdbi-sqlobject = {module="org.jdbi:jdbi3-sqlobject", version.ref="jdbi"}
+jdbi-processor = {module="org.jdbi:jdbi3-generator", version.ref="jdbi"}
+
+mariadb = "org.mariadb.jdbc:mariadb-java-client:3.3.3"
+liquibase = "org.liquibase:liquibase-core:4.25.1"
+snakeyaml = "org.yaml:snakeyaml:2.2"
+
+junit-jupiter = "org.junit.jupiter:junit-jupiter-api:5.10.2"
+
+[bundles]
+jdbi = ["jdbi-core", "jdbi-sqlobject"]

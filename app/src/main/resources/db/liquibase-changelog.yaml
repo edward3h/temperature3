@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: edward3h
+      changes:
+        - createTable:
+            tableName: temperature_reading
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: recorded_at
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value_celsius
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_type
+                  type: varchar(255)

@@ -1,0 +1,6 @@
+amends "dev.pkl"
+
+datasource {
+  url = "jdbc:mariadb://mariadb:3306/temperature?user=\(user)&password=\(password)"
+  password = read("env:MARIADB_PASSWORD")
+}

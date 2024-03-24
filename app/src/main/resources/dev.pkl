@@ -1,0 +1,21 @@
+amends "ConfigurationTemplate.pkl"
+
+datasource {
+  url = "jdbc:mariadb://localhost:3306/temperature?user=\(user)&password=\(password)"
+  user = "temp3"
+  password = "testing123"
+}
+
+sensors {
+  url = "http://expunge2:8888"
+}
+
+openweather {
+  url = "https://api.openweathermap.org/data/2.5/onecall?appid=\(read("env:OPENWEATHER_ID"))&lat\(read("env:LAT"))=&lon=\(read("env:LON"))&exclude=minutely,hourly,alerts&units=imperial"
+  pollEvery = 15.min
+}
+
+pollers {
+  ["sensors"] = sensors
+  ["openweather"] = openweather
+}

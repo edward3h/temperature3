@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10
+    restart: no
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: yes
+      MARIADB_DATABASE: temperature
+      MARIADB_USER: temp3
+      MARIADB_PASSWORD: testing123
+    ports:
+      - "3306:3306"
+
+  adminer:
+    image: adminer:latest
+    restart: no
+    ports:
+      - "8080:8080"
