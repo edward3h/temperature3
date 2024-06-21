@@ -3,13 +3,11 @@ package org.ethelred.temperature3;
 import io.avaje.inject.Bean;
 import io.avaje.inject.Factory;
 import io.avaje.inject.test.TestScope;
-import javax.sql.DataSource;
-
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.inject.Singleton;
-import org.h2.jdbcx.JdbcDataSource;
-
 import java.util.Map;
+import javax.sql.DataSource;
+import org.h2.jdbcx.JdbcDataSource;
 
 @TestScope
 @Factory
@@ -27,7 +25,6 @@ public class TestFactory {
         return new MockDotenv(Map.of(
                 "OPENWEATHER_ID", "12345",
                 "LAT", "12.3",
-                "LON", "4.56"
-        ));
+                "LON", "4.56"));
     }
 }
