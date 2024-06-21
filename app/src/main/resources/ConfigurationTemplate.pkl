@@ -3,6 +3,7 @@ module org.ethelred.temperature3.configuration
 
 sensors: Poller
 openweather: Poller
+kumojs: Poller
 pollers: Mapping<String, Poller>
 datasource: DataSource
 

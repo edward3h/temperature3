@@ -17,12 +17,12 @@ import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import org.ethelred.temperature3.templates.StaticTemplates;
+import org.ethelred.temperature3.templates.Templates;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.mariadb.jdbc.MariaDbDataSource;
-import org.pkl.config.java.ConfigEvaluator;
 import org.pkl.config.java.ConfigEvaluatorBuilder;
-import org.pkl.core.EvaluatorBuilder;
 import org.pkl.core.ModuleSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,9 @@ public class CommonFactory {
     public Configuration configuration(Dotenv dotenv) {
         var dotenvMap = dotenv.entries().stream().collect(Collectors.toMap(DotenvEntry::getKey, DotenvEntry::getValue));
         var profile = dotenvMap.getOrDefault("PROFILE", "dev");
-        try (var eval = ConfigEvaluatorBuilder.preconfigured().addEnvironmentVariables(dotenvMap).build()) {
+        try (var eval = ConfigEvaluatorBuilder.preconfigured()
+                .addEnvironmentVariables(dotenvMap)
+                .build()) {
             return eval.evaluate(ModuleSource.modulePath(profile + ".pkl")).as(Configuration.class);
         }
     }
@@ -61,6 +63,16 @@ public class CommonFactory {
                 .bodyAdapter(new JsonbBodyAdapter())
                 .build()
                 .create(SensorsAPI.class);
+    }
+
+    @Singleton
+    @Bean
+    public KumoJsAPI kumoJsAPI(Configuration configuration) {
+        return HttpClient.builder()
+                .baseUrl(configuration.getKumojs().getUrl().toString())
+                .bodyAdapter(new JsonbBodyAdapter())
+                .build()
+                .create(KumoJsAPI.class);
     }
 
     @Bean
@@ -98,5 +110,10 @@ public class CommonFactory {
     @Bean
     public ReadingsDao readingsDao(Jdbi jdbi) {
         return jdbi.onDemand(ReadingsDao.class);
+    }
+
+    @Bean
+    public Templates templates() {
+        return new StaticTemplates();
     }
 }

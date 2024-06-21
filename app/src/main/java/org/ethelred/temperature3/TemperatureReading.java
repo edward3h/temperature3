@@ -11,4 +11,8 @@ public record TemperatureReading(OffsetDateTime recordedAt, double valueCelsius,
             OffsetDateTime recordedAt, Temperature temperature, String sourceName, String sourceType) {
         this(recordedAt, temperature.celsius(), sourceName, sourceType);
     }
+
+    public Temperature temperature() {
+        return new Temperature(valueCelsius);
+    }
 }

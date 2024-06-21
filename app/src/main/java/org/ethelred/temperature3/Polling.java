@@ -6,9 +6,12 @@ import jakarta.inject.Singleton;
 import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class Polling {
+    private final Logger LOGGER = LoggerFactory.getLogger(Polling.class);
     private final Configuration configuration;
     private final ScheduledExecutorService executorService;
     private final Map<String, Poller> pollers;
@@ -21,6 +24,8 @@ public class Polling {
         this.configuration = configuration;
         this.executorService = executorService;
         this.pollers = pollers;
+        LOGGER.info("Pollers: {}", pollers);
+        LOGGER.info("Pollers configuration: {}", configuration.getPollers());
     }
 
     public void start() {

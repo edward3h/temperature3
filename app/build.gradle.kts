@@ -2,9 +2,10 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     idea
-    id("com.diffplug.spotless") version "6.25.0"
-    id("org.pkl-lang") version "0.25.2"
-    id("com.bmuschko.docker-java-application") version "9.4.0"
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.pkl)
+    alias(libs.plugins.docker.application)
+    alias(libs.plugins.jte)
 }
 
 repositories {
@@ -13,11 +14,7 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor(libs.avaje.inject.processor)
-    annotationProcessor(libs.avaje.http.processor)
-    annotationProcessor(libs.avaje.http.client.processor)
-    annotationProcessor(libs.avaje.jsonb.processor)
-    annotationProcessor(libs.jdbi.processor)
+    annotationProcessor(libs.bundles.processors)
     implementation(libs.helidon.webserver)
     implementation(libs.avaje.inject)
     implementation(libs.avaje.http)
@@ -26,27 +23,30 @@ dependencies {
 //    implementation(libs.avaje.config)
     implementation(libs.slf4j)
     implementation(libs.liquibase)
-    implementation("org.pkl-lang:pkl-codegen-java:0.25.2")
-    implementation("org.pkl-lang:pkl-config-java:0.25.2")
-    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+    implementation(libs.bundles.config)
+    runtimeOnly(libs.graalvm.sdk)
+    runtimeOnly(libs.graalvm.truffle.api)
     runtimeOnly(libs.snakeyaml)
+    runtimeOnly(libs.avaje.applog)
     runtimeOnly(libs.logevents)
     implementation(libs.bundles.jdbi)
     implementation(libs.mariadb)
+    implementation(libs.jte.core)
+    jteGenerate(libs.jte.models)
     testAnnotationProcessor(libs.avaje.inject.processor)
-    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.api)
     testImplementation(libs.avaje.inject.test)
-    testImplementation("com.h2database:h2:2.2.224")
-    testImplementation("org.assertj:assertj-core:3.25.1")
+    testImplementation(libs.h2)
+    testImplementation(libs.assertj)
 
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.1")
+    testRuntimeOnly(libs.junit.engine)
+    testRuntimeOnly(libs.junit.platform)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
@@ -102,6 +102,16 @@ pkl {
 
 docker {
     javaApplication {
-        baseImage = "eclipse-temurin:21-alpine"
+        baseImage = "eclipse-temurin:22-alpine"
     }
+}
+
+jte {
+    generate()
+    jteExtension("gg.jte.models.generator.ModelExtension")
+    packageName = "org.ethelred.temperature3.templates"
+}
+
+tasks.named("genJava") {
+    dependsOn(tasks.named("generateJte"))
 }

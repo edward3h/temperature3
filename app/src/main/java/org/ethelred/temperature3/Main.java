@@ -19,6 +19,6 @@ public class Main {
         var routeBuilder = HttpRouting.builder();
         var routes = bs.list(HttpFeature.class);
         routes.forEach(routeBuilder::addFeature);
-        WebServer.builder().addRouting(routeBuilder).build().start();
+        WebServer.builder().port(8090).addRouting(routeBuilder).build().start();
     }
 }

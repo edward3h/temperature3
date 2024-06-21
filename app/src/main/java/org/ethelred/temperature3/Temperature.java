@@ -2,16 +2,27 @@ package org.ethelred.temperature3;
 
 public record Temperature(double celsius) {
     public enum Unit {
-        CELSIUS,
-        FAHRENHEIT {
+        CELSIUS("C"),
+        FAHRENHEIT("F") {
             @Override
             double toCelsius(double v) {
                 return (v - 32.0) * 5.0 / 9.0;
             }
         };
 
+        private final String symbol;
+
+        Unit(String symbol) {
+
+            this.symbol = symbol;
+        }
+
         double toCelsius(double v) {
             return v;
+        }
+
+        public String symbol() {
+            return symbol;
         }
     }
 
@@ -25,5 +36,12 @@ public record Temperature(double celsius) {
 
     public double fahrenheit() {
         return celsius * 9.0 / 5.0 + 32.0;
+    }
+
+    public double temperature(Unit unit) {
+        return switch (unit) {
+            case FAHRENHEIT -> fahrenheit();
+            case CELSIUS -> celsius();
+        };
     }
 }

@@ -17,8 +17,10 @@ public class SensorsPoller implements Poller {
     @Override
     public void poll() {
         var response = api.get();
-        var temperatureReadings =
-                response.stream().map(this::asTemperatureReading).toList();
+        var temperatureReadings = response.stream()
+                .filter(sensorReading -> sensorReading.name() != null)
+                .map(this::asTemperatureReading)
+                .toList();
         dao.saveTemperatureReadings(temperatureReadings);
     }
 

@@ -4,6 +4,10 @@ avaje-inject = "9.11"
 avaje-http = "2.0"
 avaje-jsonb = "1.9"
 jdbi = "3.43.0"
+pkl = "0.26.0"
+jte = "3.1.9"
+junit-jupiter = "5.10.2"
+graalvm-sdk = "24.0.1"
 
 [libraries]
 avaje-inject = { module="io.avaje:avaje-inject", version.ref="avaje-inject"}
@@ -15,20 +19,47 @@ avaje-http-client = { module="io.avaje:avaje-http-client", version.ref="avaje-ht
 avaje-http-client-processor = { module="io.avaje:avaje-http-client-generator", version.ref="avaje-http"}
 avaje-jsonb = {module="io.avaje:avaje-jsonb", version.ref="avaje-jsonb"}
 avaje-jsonb-processor = {module="io.avaje:avaje-jsonb-generator", version.ref="avaje-jsonb"}
-avaje-config = "io.avaje:avaje-config:3.10"
+avaje-applog = "io.avaje:avaje-applog-slf4j:1.0"
+#avaje-config = "io.avaje:avaje-config:3.10"
 helidon-webserver = "io.helidon.webserver:helidon-webserver:4.0.5"
 slf4j = "org.slf4j:slf4j-api:2.0.11"
 logevents = "org.logevents:logevents:0.5.2"
+
+pkl-codegen = {module="org.pkl-lang:pkl-codegen-java", version.ref="pkl"}
+pkl-config = {module="org.pkl-lang:pkl-config-java", version.ref="pkl"}
+dotenv = "io.github.cdimascio:dotenv-java:3.0.0"
+graalvm-sdk = {module="org.graalvm.sdk:graal-sdk", version.ref="graalvm-sdk"}
+graalvm-truffle-api = {module="org.graalvm.truffle:truffle-api", version.ref="graalvm-sdk"}
 
 jdbi-core = {module="org.jdbi:jdbi3-core", version.ref="jdbi"}
 jdbi-sqlobject = {module="org.jdbi:jdbi3-sqlobject", version.ref="jdbi"}
 jdbi-processor = {module="org.jdbi:jdbi3-generator", version.ref="jdbi"}
 
+jte-core = {module="gg.jte:jte", version.ref="jte"}
+jte-models = {module="gg.jte:jte-models", version.ref="jte"}
 mariadb = "org.mariadb.jdbc:mariadb-java-client:3.3.3"
 liquibase = "org.liquibase:liquibase-core:4.25.1"
 snakeyaml = "org.yaml:snakeyaml:2.2"
+h2 = "com.h2database:h2:2.2.224"
+assertj = "org.assertj:assertj-core:3.25.1"
 
-junit-jupiter = "org.junit.jupiter:junit-jupiter-api:5.10.2"
+junit-api = {module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter"}
+junit-engine = {module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter"}
+junit-platform = "org.junit.platform:junit-platform-launcher:1.10.1"
+
+[plugins]
+jte = { id = "gg.jte.gradle", version.ref = "jte"}
+spotless = "com.diffplug.spotless:6.25.0"
+pkl = { id = "org.pkl-lang", version.ref = "pkl" }
+docker-application = "com.bmuschko.docker-java-application:9.4.0"
 
 [bundles]
 jdbi = ["jdbi-core", "jdbi-sqlobject"]
+processors = [
+    "avaje-inject-processor",
+    "avaje-http-processor",
+    "avaje-http-client-processor",
+    "avaje-jsonb-processor",
+    "jdbi-processor"
+]
+config = ["pkl-codegen", "pkl-config", "dotenv"]
