@@ -21,7 +21,7 @@ avaje-jsonb = {module="io.avaje:avaje-jsonb", version.ref="avaje-jsonb"}
 avaje-jsonb-processor = {module="io.avaje:avaje-jsonb-generator", version.ref="avaje-jsonb"}
 avaje-applog = "io.avaje:avaje-applog-slf4j:1.0"
 #avaje-config = "io.avaje:avaje-config:3.10"
-helidon-webserver = "io.helidon.webserver:helidon-webserver:4.0.5"
+helidon-webserver = "io.helidon.webserver:helidon-webserver:4.0.10"
 slf4j = "org.slf4j:slf4j-api:2.0.11"
 logevents = "org.logevents:logevents:0.5.2"
 
