@@ -2,7 +2,7 @@
 [versions]
 avaje-inject = "9.11"
 avaje-http = "2.0"
-avaje-jsonb = "1.9"
+avaje-jsonb = "1.12"
 jdbi = "3.43.0"
 pkl = "0.26.0"
 jte = "3.1.9"
