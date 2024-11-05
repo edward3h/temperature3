@@ -38,7 +38,7 @@ jdbi-processor = {module="org.jdbi:jdbi3-generator", version.ref="jdbi"}
 jte-core = {module="gg.jte:jte", version.ref="jte"}
 jte-models = {module="gg.jte:jte-models", version.ref="jte"}
 mariadb = "org.mariadb.jdbc:mariadb-java-client:3.3.3"
-liquibase = "org.liquibase:liquibase-core:4.25.1"
+liquibase = "org.liquibase:liquibase-core:4.30.0"
 snakeyaml = "org.yaml:snakeyaml:2.2"
 h2 = "com.h2database:h2:2.2.224"
 assertj = "org.assertj:assertj-core:3.25.1"
