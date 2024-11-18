@@ -5,7 +5,7 @@ avaje-http = "2.0"
 avaje-jsonb = "1.9"
 jdbi = "3.43.0"
 pkl = "0.26.0"
-jte = "3.1.9"
+jte = "3.1.15"
 junit-jupiter = "5.10.2"
 graalvm-sdk = "24.0.1"
 
